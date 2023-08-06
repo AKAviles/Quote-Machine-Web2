@@ -7,8 +7,8 @@ import TattooInkAmount from "../MainQuoteComponents/TattooInkAmount";
 import TattooLayering from "../MainQuoteComponents/TattooLayering";
 import TattooScarring from "../MainQuoteComponents/TattooScarring";
 import TattooSize from "../MainQuoteComponents/TattooSize";
+import TattooColor from "../MainQuoteComponents/TattooColor";
 import DisplayTotal from "../MainQuoteComponents/DisplayTotal";
-import NewTattooColor from "../MainQuoteComponents/NewTattooColor";
 import "../../css/mainQuote.css";
 import "../../css/card.css";
 import "../../css/radios.css";
@@ -29,7 +29,7 @@ export default function MainQuote() {
 
   const [formData, setFormData] = useState({ ...initialFormState });
   const [spot, setSpot] = useState(0);
-  const [clickState, setClickState] = useState(-1); // 1,2,3,4 // -1
+  //const [clickState, setClickState] = useState(-1); // 1,2,3,4 // -1
 
   function handleChange({ target }) {
     setFormData({
@@ -38,14 +38,14 @@ export default function MainQuote() {
     });
   }
 
-  function handleColorChange({ target }, n) {
-    setClickState(n);
-    setFormData({
-      ...formData,
-      [target.getAttribute("name")]: target.getAttribute("value"),
-    });
-    console.log(clickState);
-  }
+  // function handleColorChange({ target }, n) {
+  //   setClickState(n);
+  //   setFormData({
+  //     ...formData,
+  //     [target.getAttribute("name")]: target.getAttribute("value"),
+  //   });
+  //   console.log(clickState);
+  // }
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -58,11 +58,7 @@ export default function MainQuote() {
     <SkinType formData={formData} handleChange={handleChange} />,
     <TattooAge formData={formData} handleChange={handleChange} />,
     <TattooSize formData={formData} handleChange={handleChange} />,
-    <NewTattooColor
-      formData={formData}
-      clickState={clickState}
-      handleColorChange={handleColorChange}
-    />,
+    <TattooColor formData={formData} handleChange={handleChange} />,
     <TattooInkAmount formData={formData} handleChange={handleChange} />,
     <TattooScarring formData={formData} handleChange={handleChange} />,
     <TattooLayering formData={formData} handleChange={handleChange} />,
@@ -84,9 +80,6 @@ export default function MainQuote() {
     <>
       {spot === 4 ? (
         <>
-          <h3 style={{ padding: "5px", margin: "5px" }}>
-            What color is your tattoo?
-          </h3>
           <div className='test-flexbox-container'>{cards[spot]}</div>
           <div>
             {spot !== 0 ? (
